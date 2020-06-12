@@ -146,6 +146,8 @@ public:
 	SIFTGPU_EXPORT virtual void SaveSIFT(const char * szFileName);
 	//Copy the SIFT result to two vectors
 	SIFTGPU_EXPORT virtual void GetFeatureVector(SiftKeypoint * keys, float * descriptors);
+  SIFTGPU_EXPORT virtual const float* GetKeypointBuffer() const;
+  SIFTGPU_EXPORT virtual const float* GetDescriptorBuffer() const;
 	//Set keypoint list before running sift to get descriptors
 	SIFTGPU_EXPORT virtual void SetKeypointList(int num, const SiftKeypoint * keys, int keys_have_orientation = 1);
 	//Enable downloading results to CPU. 
@@ -156,6 +158,9 @@ public:
 	//verify the current opengl context..
 	//(for example, you call wglmakecurrent yourself and verify the current context)
 	SIFTGPU_EXPORT virtual int VerifyContextGL();
+  //destroy the OpenGL context
+  //solve the problem where sometimes FreeLibrary will get stuck.
+	SIFTGPU_EXPORT virtual void DestroyContextGL();
 	//check if all siftgpu functions are supported
 	SIFTGPU_EXPORT virtual int IsFullSupported();
 	//set verbose mode
@@ -270,10 +275,12 @@ protected:
 	//move the two functions here for derived class
 	SIFTGPU_EXPORT virtual int  _CreateContextGL();
 	SIFTGPU_EXPORT virtual int  _VerifyContextGL();
+	SIFTGPU_EXPORT virtual void  _DestroyContextGL();
 public:
 	//OpenGL Context creation/verification, initialization is done automatically inside
 	inline int  CreateContextGL() {return _CreateContextGL();}
 	inline int  VerifyContextGL() {return _VerifyContextGL();}
+	inline void  DestroyContextGL() { _DestroyContextGL();}
 
 	//Consructor, the argument specifies the maximum number of features to match
 	SIFTGPU_EXPORT SiftMatchGPU(int max_sift = 4096);

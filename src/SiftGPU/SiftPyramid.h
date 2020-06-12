@@ -95,6 +95,8 @@ public:
 public:
 	vector<float>	_keypoint_buffer;
 	vector<float>	_descriptor_buffer;
+  inline const float* GetKeypointBuffer() const { return _keypoint_buffer.data(); }
+  inline const float* GetDescriptorBuffer() const { return _descriptor_buffer.data(); }
 private:
 	inline  void PrepareBuffer();
 	inline  void LimitFeatureCount(int have_keylist = 0);

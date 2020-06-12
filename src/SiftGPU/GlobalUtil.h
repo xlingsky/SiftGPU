@@ -101,6 +101,8 @@ public:
 	static int				_WindowInitY;
 	static const char*		_WindowDisplay;
     static int              _DeviceIndex; 
+
+  static LiteWindow*	_LiteWindow;
 };
 
 
@@ -145,6 +147,7 @@ public:
 	static void CleanupOpenGL();
     static void SetDeviceParam(int argc, char** argv);
     static int  CreateWindowEZ(LiteWindow* window);
+  static void	DestroyWiindowEZ();
 };
 
 

@@ -133,6 +133,15 @@ int GlobalParam::			_WindowInitY = -1;
 int GlobalParam::           _DeviceIndex = 0; 
 const char * GlobalParam::	_WindowDisplay = NULL;
 
+LiteWindow* GlobalParam::_LiteWindow = NULL;
+struct GlobalPtrManager{
+  GlobalPtrManager(){}
+  ~GlobalPtrManager(){
+    if(GlobalParam::_LiteWindow!=NULL){
+      delete GlobalParam::_LiteWindow;
+    }
+  }
+}g_global_ptrmanager;
 
 
 /////////////////
@@ -509,8 +518,17 @@ int GlobalUtil::CreateWindowEZ(LiteWindow* window)
 
 int GlobalUtil::CreateWindowEZ()
 {
-	static LiteWindow window;
-    return CreateWindowEZ(&window);
+  if(_LiteWindow==NULL){
+    _LiteWindow = new LiteWindow;
+  }
+    return CreateWindowEZ(_LiteWindow);
+}
+
+void GlobalUtil::DestroyWiindowEZ(){
+  if(_LiteWindow!=NULL) {
+    delete _LiteWindow;
+    _LiteWindow = NULL;
+  }
 }
 
 int CreateLiteWindow(LiteWindow* window)

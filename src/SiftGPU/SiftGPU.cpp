@@ -1309,6 +1309,10 @@ int SiftGPU::VerifyContextGL()
 	return (GlobalUtil::_GoodOpenGL > 0) + GlobalUtil::_FullSupported;
 }
 
+void SiftGPU::DestroyContextGL(){
+  GlobalUtil::DestroyWiindowEZ();
+}
+
 int SiftGPU::IsFullSupported()
 {
 	return GlobalUtil::_GoodOpenGL > 0 &&  GlobalUtil::_FullSupported;
@@ -1336,6 +1340,13 @@ void SiftGPU::GetFeatureVector(SiftKeypoint * keys, float * descriptors)
 		//descriptors.resize(0);
 		_pyramid->CopyFeatureVector((float*) (&keys[0]), NULL);
 	}
+}
+
+const float* SiftGPU::GetKeypointBuffer() const{
+  return _pyramid->GetKeypointBuffer();
+}
+const float* SiftGPU::GetDescriptorBuffer() const{
+  return _pyramid->GetDescriptorBuffer();
 }
 
 void SiftGPU::SetTightPyramid(int tight)

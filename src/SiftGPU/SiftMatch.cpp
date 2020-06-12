@@ -600,6 +600,10 @@ int SiftMatchGPU::_VerifyContextGL()
 	return GlobalUtil::_GoodOpenGL;
 }
 
+void SiftMatchGPU::_DestroyContextGL(){
+  GlobalUtil::DestroyWiindowEZ();
+}
+
 void* SiftMatchGPU::operator new (size_t  size){
   void * p = malloc(size);
   if (p == 0)  

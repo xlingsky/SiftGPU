@@ -7,6 +7,7 @@ http://cs.unc.edu/~ccwu
 University of North Carolina at Chapel Hill
 
 
+This is a fork of https://github.com/pitzer/SiftGPU.
 
 
 1. SIFT 
