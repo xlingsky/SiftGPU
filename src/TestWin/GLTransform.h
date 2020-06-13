@@ -24,6 +24,7 @@
 #define GL_TRANSFORM_H
 
 #include <math.h>
+#include <glm/gtc/matrix_transform.hpp>
 class GlTransform
 {
 public:
@@ -102,10 +103,10 @@ public:
 	 void transform(double es = 1.0)
 	 {
 	    double s = sc* es;
-		glTranslated(cx*es, cy*es, 0.0);
-		glTranslated(t[0] ,t[1] ,t[2]);
-		glScaled(s,s,s);
-		glTranslated(-cx, - cy, 0);
+		glm::translate(glm::mat4(1.f),glm::vec3(cx*es, cy*es, 0.0));
+		glm::translate(glm::mat4(1.f),glm::vec3(t[0] ,t[1] ,t[2]));
+    glm::scale(glm::mat4(1.f),glm::vec3(s,s,s));
+		glm::translate(glm::mat4(1.f),glm::vec3(-cx, - cy, 0));
 	 }
 };
 
