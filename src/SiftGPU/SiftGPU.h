@@ -49,6 +49,8 @@
     #define SIFTGPU_EXPORT_EXTERN extern "C"
 #endif
 
+#include <stddef.h>
+
 ///////////////////////////////////////////////////////////////////
 //clss SiftParam
 //description: SIFT parameters
@@ -329,8 +331,8 @@ public:
 	//the function returns the number of matches.
 	SIFTGPU_EXPORT virtual int  GetGuidedSiftMatch(
 					int max_match, int match_buffer[][2], //buffer to recieve 
-					float H[3][3],			//homography matrix,  (Set NULL to skip)
-					float F[3][3],			//fundamental matrix, (Set NULL to skip)
+					float H[3][3],			//homography matrix,  (Set nullptr to skip)
+					float F[3][3],			//fundamental matrix, (Set nullptr to skip)
 					float distmax = 0.7,	//maximum distance of sift descriptor
 					float ratiomax = 0.8,   //maximum distance ratio
 					float hdistmax = 32,    //threshold for |H * x1 - x2|_1 
@@ -360,9 +362,9 @@ SIFTGPU_EXPORT_EXTERN ComboSiftGPU* CreateComboSiftGPU();
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //Multi-process mode and remote mode
-SIFTGPU_EXPORT_EXTERN ComboSiftGPU* CreateRemoteSiftGPU(int port = 7777, char* remote_server = NULL);
+SIFTGPU_EXPORT_EXTERN ComboSiftGPU* CreateRemoteSiftGPU(int port = 7777, char* remote_server = nullptr);
 //Run SiftGPU computation on a remote computer/process/thread
-//if( remote_server == NULL) 
+//if( remote_server == nullptr) 
 //			a local server is created in a different process and connected
 //			multiple-GPU can be used by creating multiple instances
 //			GPU selection done through SiftGPU::ParseParam function
