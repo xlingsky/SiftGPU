@@ -77,6 +77,7 @@ using std::iostream;
 
 int main()
 {
+
 #ifdef SIFTGPU_DLL_RUNTIME
     #ifdef _WIN32
         #ifdef _DEBUG
@@ -84,6 +85,8 @@ int main()
         #else
             HMODULE  hsiftgpu = LoadLibrary("siftgpu.dll");
         #endif
+    #elif defined(__APPLE__)
+        void * hsiftgpu = dlopen("libsiftgpu.dylib", RTLD_LAZY);
     #else
         void * hsiftgpu = dlopen("libsiftgpu.so", RTLD_LAZY);
     #endif
